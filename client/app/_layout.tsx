@@ -7,9 +7,9 @@ import { useFonts } from "expo-font";
 import { Slot } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
-import { ClerkProvider } from "@clerk/clerk-expo";
-import { tokenCache } from "@clerk/clerk-expo/token-cache";
+import { ClerkLoaded, ClerkProvider } from "@clerk/clerk-expo";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { tokenCache } from "@/cache";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -24,9 +24,14 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <ClerkProvider tokenCache={tokenCache}>
-        <Slot />
-        <StatusBar style="auto" />
+      <ClerkProvider
+        tokenCache={tokenCache}
+        publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      >
+        <ClerkLoaded>
+          <Slot />
+          <StatusBar style="auto" />
+        </ClerkLoaded>
       </ClerkProvider>
     </ThemeProvider>
   );
