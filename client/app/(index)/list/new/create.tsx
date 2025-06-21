@@ -1,17 +1,54 @@
 import { BodyScrollView } from "@/components/BodyScrollView";
 import { Button } from "@/components/ui/Button";
 import { TextInput } from "@/components/ui/text-input";
-import { appleBlue } from "@/constants/Colors";
+import { appleBlue, backgroundColors, emojies } from "@/constants/Colors";
 import { useListContext } from "@/context/ListContext";
-import { Link, Stack } from "expo-router";
-import React, { useState } from "react";
+import { useAddShoppingListCallback } from "@/store/ShoppingListsStore";
+import { Link, router, Stack } from "expo-router";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function CreateListScreen() {
   const [listName, setListName] = useState<string>("");
   const [listDescription, setListDescription] = useState<string>("");
-  const { selectedColor, selectedEmoji } = useListContext();
-  const handleCreateList = () => {};
+  const { selectedColor, selectedEmoji, setSelectedColor, setSelectedEmoji } =
+    useListContext();
+
+  const useAddShoppingList = useAddShoppingListCallback();
+
+  const handleCreateList = () => {
+    if (!listName) {
+      return;
+    }
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const listId = useAddShoppingList(
+      listName,
+      listDescription,
+      selectedEmoji,
+      selectedColor
+    );
+
+    router.replace({
+      pathname: "/list/[listId]",
+      params: {
+        listId,
+      },
+    });
+  };
+
+  useEffect(() => {
+    setSelectedEmoji(emojies[Math.floor(Math.random() * emojies.length)]);
+    setSelectedColor(
+      backgroundColors[Math.floor(Math.random() * backgroundColors.length)]
+    );
+
+    return () => {
+      setSelectedColor("");
+      setSelectedEmoji("");
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

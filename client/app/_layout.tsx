@@ -10,6 +10,8 @@ import "react-native-reanimated";
 import { ClerkLoaded, ClerkProvider } from "@clerk/clerk-expo";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { tokenCache } from "@/cache";
+import React from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -29,7 +31,9 @@ export default function RootLayout() {
         publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}
       >
         <ClerkLoaded>
-          <Slot />
+          <GestureHandlerRootView>
+            <Slot />
+          </GestureHandlerRootView>
           <StatusBar style="auto" />
         </ClerkLoaded>
       </ClerkProvider>
