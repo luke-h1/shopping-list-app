@@ -8,7 +8,7 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import { zincColors } from "@/constants/Colors";
+import { appleRed, zincColors } from "@/constants/Colors";
 import { ThemedText } from "../ThemedText";
 
 type InputVariant = "default" | "filled" | "outlined" | "ghost";
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   error: {
-    color: "#ef4444",
+    color: appleRed,
     marginTop: 4,
   },
   disabled: {
