@@ -1,8 +1,8 @@
 import { BodyScrollView } from "@/components/BodyScrollView";
-import { ThemedText } from "@/components/ThemedText";
 import { Button } from "@/components/ui/Button";
-import TextInput from "@/components/ui/text-input";
+import { TextInput } from "@/components/ui/text-input";
 import { appleBlue } from "@/constants/Colors";
+import { useListContext } from "@/context/ListContext";
 import { Link, Stack } from "expo-router";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -10,7 +10,7 @@ import { StyleSheet, Text, View } from "react-native";
 export default function CreateListScreen() {
   const [listName, setListName] = useState<string>("");
   const [listDescription, setListDescription] = useState<string>("");
-
+  const { selectedColor, selectedEmoji } = useListContext();
   const handleCreateList = () => {};
 
   return (
@@ -39,15 +39,15 @@ export default function CreateListScreen() {
             href={{
               pathname: "/emoji-picker",
             }}
-            style={[styles.emojiButton, { borderColor: "blue" }]}
+            style={[styles.emojiButton, { borderColor: selectedColor }]}
           >
             <View style={styles.emojiContainer}>
-              <Text>{"😄"}</Text>
+              <Text>{selectedEmoji}</Text>
             </View>
           </Link>
           <Link
-            href={{ pathname: "/" }}
-            style={[styles.colorButton, { borderColor: "blue" }]}
+            href={{ pathname: "/color-picker" }}
+            style={[styles.colorButton, { borderColor: selectedColor }]}
           >
             <View style={styles.colorContainer}>
               <View
@@ -55,7 +55,7 @@ export default function CreateListScreen() {
                   width: 24,
                   height: 24,
                   borderRadius: 100,
-                  backgroundColor: "blue",
+                  backgroundColor: selectedColor,
                 }}
               />
             </View>

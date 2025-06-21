@@ -57,6 +57,26 @@ export default function HomeLayout() {
             ),
           }}
         />
+        <Stack.Screen
+          name="emoji-picker"
+          options={{
+            presentation: "formSheet",
+            headerTitle: "Choose an Emoji",
+            sheetGrabberVisible: true,
+            headerLargeTitle: false,
+            sheetAllowedDetents: [0.5, 0.75, 1],
+          }}
+        />
+        <Stack.Screen
+          name="color-picker"
+          options={{
+            presentation: "formSheet",
+            headerTitle: "Choose a color",
+            sheetGrabberVisible: true,
+            headerLargeTitle: false,
+            sheetAllowedDetents: [0.5, 0.75, 1],
+          }}
+        />
       </Stack>
     </ListContextProvider>
   );

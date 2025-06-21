@@ -1,19 +1,20 @@
-import { emojies } from "@/constants/Colors";
+import { backgroundColors } from "@/constants/Colors";
 import { useListContext } from "@/context/ListContext";
 import { useRouter } from "expo-router";
-import { FlatList, Pressable, Text } from "react-native";
+import { FlatList, Pressable, View } from "react-native";
 
-export default function EmojiPickerScreen() {
-  const { setSelectedEmoji } = useListContext();
-  const handleEmojiSelect = (emoji: string) => {
-    setSelectedEmoji(emoji);
+export default function ColorPickerScreen() {
+  const { setSelectedColor } = useListContext();
+  const handleColorSelect = (emoji: string) => {
+    setSelectedColor(emoji);
     router.back();
   };
+
   const router = useRouter();
 
   return (
     <FlatList<string>
-      data={emojies}
+      data={backgroundColors}
       numColumns={5}
       keyExtractor={(item) => item}
       automaticallyAdjustContentInsets
@@ -24,20 +25,21 @@ export default function EmojiPickerScreen() {
       }}
       renderItem={({ item }) => (
         <Pressable
-          onPress={() => handleEmojiSelect(item)}
+          onPress={() => handleColorSelect(item)}
           style={{
             flex: 1,
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <Text
+          <View
             style={{
-              fontSize: 40,
+              width: 40,
+              height: 40,
+              borderRadius: 100,
+              backgroundColor: item,
             }}
-          >
-            {item}
-          </Text>
+          />
         </Pressable>
       )}
     />

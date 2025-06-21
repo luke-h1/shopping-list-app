@@ -3,7 +3,7 @@ import { Href, useGlobalSearchParams, useRouter } from "expo-router";
 import { StyleSheet, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { ThemedText } from "@/components/ThemedText";
-import TextInput from "@/components/ui/text-input";
+import { TextInput } from "@/components/ui/text-input";
 import { backgroundColors, emojies } from "@/constants/Colors";
 import { Button } from "@/components/ui/Button";
 import { BodyScrollView } from "@/components/BodyScrollView";
